@@ -1,0 +1,85 @@
+body {
+    font-size: 15px;
+    font-family: Baskerville, "Baskerville Old Face", Garamond, "Times New Roman";
+    color: #222;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    border-bottom: 1px #aaa solid;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin: 0 0 20px 0;
+}
+
+a {
+    color: #08f;
+}
+
+h2 small {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+a.active-nav-link {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-button {
+    color: #08f;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+table.stats {
+    margin: 20px 0;
+    border-top: 1px #aaa solid;
+    border-spacing: 0;
+}
+
+table.stats thead td {
+    background-color: #ddd;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+table.stats td {
+    border-bottom: 1px #aaa solid;
+    padding: 5px;
+    line-height: 30px;
+}
+
+table.stats td:nth-child(1),
+table.stats td:nth-child(2) {
+    width: 150px;
+}
+
+table.stats td:nth-child(3) {
+    width: 120px;
+}
+
+table.stats td.editable {
+    cursor: pointer;
+}
+
+table.stats tr:nth-child(even) {
+    background-color: #eee;
+}
+
+table.stats tfoot td {
+    line-height: 30px;
+    border-bottom: 0;
+    background-color: transparent;
+}
+
+table.stats input {
+    width: 100%;
+}
