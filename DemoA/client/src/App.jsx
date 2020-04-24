@@ -4,9 +4,6 @@ import './App.css';
 import StatisticsDataProvider from './contexts/StatisticsData';
 import StatTypeDataProvider from './contexts/StatTypeData';
 import PingDataProvider from './contexts/PingData';
-import EntityTypeDataProvider from './contexts/eav/meta/EntityTypeData';
-import EntityTypeAttributeDataProvider from './contexts/eav/meta/EntityTypeAttributeData';
-import ValueTypeDataProvider from './contexts/eav/meta/ValueTypeData';
 
 // / (default = about)
 import About from './routes/About';
@@ -16,11 +13,6 @@ import Pings from './routes/Pings';
 
 // /graphs
 import Graphs from './routes/Graphs';
-
-// /crud
-import Crud from './routes/Crud';
-import EntityTypes from './routes/Crud/Meta/EntityTypes';
-import EntityTypeDetails from './routes/Crud/Meta/EntityTypeDetails';
 
 // /old-crud
 import ListStatTypes from './routes/ListStatTypes';
@@ -40,8 +32,6 @@ function App() {
                     <span>&nbsp;|&nbsp;</span>
                     <NavLink exact activeClassName="active-nav-link" to="/graphs">Graphs</NavLink>
                     <span>&nbsp;|&nbsp;</span>
-                    <NavLink activeClassName="active-nav-link" to="/crud">CRUD</NavLink>
-                    <span>&nbsp;|&nbsp;</span>
                     (<NavLink activeClassName="active-nav-link" to="/old-crud">Old CRUD</NavLink>)
                 </nav>
                 <hr />
@@ -53,15 +43,6 @@ function App() {
             <StatisticsDataProvider>
                 <Route exact path="/graphs" component={Graphs} />
             </StatisticsDataProvider>
-            <EntityTypeDataProvider>
-                <EntityTypeAttributeDataProvider>
-                    <ValueTypeDataProvider>
-                        <Route exact path="/crud" component={Crud} />
-                        <Route exact path="/crud/meta/entity-types" component={EntityTypes} />
-                        <Route exact path="/crud/meta/entity-type-details/:id" component={EntityTypeDetails} />
-                    </ValueTypeDataProvider>
-                </EntityTypeAttributeDataProvider>
-            </EntityTypeDataProvider>
             <StatTypeDataProvider>
                 {/* /old-crud */}
                 <Route exact path="/old-crud" component={ListStatTypes} />

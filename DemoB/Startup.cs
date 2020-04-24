@@ -1,3 +1,4 @@
+using DemoB.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -6,10 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using DemoA.Models;
-using DemoA.Services;
 
-namespace DemoA
+namespace DemoB
 {
     public class Startup
     {
@@ -23,8 +22,8 @@ namespace DemoA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<StatsContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("StatsContext")));
+            services.AddDbContext<EavContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("EavContext")));
 
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -37,10 +36,7 @@ namespace DemoA
             });
 
             // dependencies
-            services.AddSingleton<IMessageService, MessageService>(); // This syntax uses automatic object disposal.
-            // ...does not: services.AddSingleton<IMessageService>(new MessageService());
             // ...see: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1#service-registration-methods
-            services.AddSingleton<IStatusHub, StatusHub>();
 
             services.AddCors(options => options.AddPolicy("CorsPolicy",
             builder =>
@@ -70,11 +66,6 @@ namespace DemoA
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<StatusHub>("/statushub");
-            });
 
             app.UseMvc(routes =>
             {

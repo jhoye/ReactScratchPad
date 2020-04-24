@@ -1,0 +1,72 @@
+body {
+    font-size: 15px;
+    font-family: Baskerville, "Baskerville Old Face", Garamond, "Times New Roman";
+    color: #222;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    border-bottom: 1px #aaa solid;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin: 0 0 20px 0;
+}
+
+a {
+    color: #08f;
+}
+
+h2 small {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+a.active-nav-link {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-button {
+    color: #08f;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.link-button-disabled {
+    color: #8cf;
+    text-decoration: underline;
+    cursor: not-allowed;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.about-page {
+    background: url('/PenroseTriangle512.png') no-repeat center;
+    min-height: 512px;
+    min-width: 512px;
+}
+
+.about-page div {
+    border: 1px #888 solid;
+    background: rgba(255, 255, 255, 0.75);
+    width: 512px;
+    margin: 0 auto;
+    padding: 8px;
+}
+
+.disabled {
+    color: #bbb;
+}
+
+.highlight {
+    background-color: #ff8;
+}
