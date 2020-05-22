@@ -27,6 +27,11 @@ h2 small {
     font-weight: normal;
 }
 
+fieldset {
+    border: 1px #aaa solid;
+    border-radius: 8px;
+}
+
 a.active-nav-link {
     color: #000;
     font-weight: bold;
@@ -69,4 +74,85 @@ a.active-nav-link {
 
 .highlight {
     background-color: #ff8;
+}
+
+header.tabs {
+    padding: 8px 0 7px 16px;
+    border-bottom: 1px #aaa solid;
+}
+
+header.tabs h3 {
+    display: inline;
+    padding: 8px 16px 8px 16px;
+    margin: 0 2px 0;
+    cursor: pointer;
+    font-weight: normal;
+    border: 1px #aaa solid;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #eee;
+}
+
+header.tabs h3.active {
+    border-bottom: 1px #fff solid;
+    background-color: #fff;
+}
+
+table.attributes {
+    width: 100%;
+    border-spacing: 0;
+}
+
+table.attributes td {
+    padding: 4px 8px;
+}
+
+table.attributes td:nth-child(1) {
+    border-left: 1px #aaa solid;
+}
+
+table.attributes td:nth-child(2) {
+    width: 80px;
+}
+
+table.attributes td:nth-child(3) {
+    width: 80px;
+    text-align: center;
+}
+
+table.attributes td:nth-child(4) {
+    width: 80px;
+    text-align: center;
+}
+
+table.attributes td:nth-child(5) {
+    width: 30px;
+    text-align: center;
+    border-right: 1px #aaa solid;
+}
+
+table.attributes thead td {
+    background: linear-gradient(#666 , #999 50%, #aaa 55%, #ddd);
+    color: #fff;
+    border-top: 1px #555 solid;
+    border-bottom: 1px #aaa solid;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 1);
+}
+
+table.attributes thead td:nth-child(1) {
+    border-left: 1px #888 solid;
+    border-radius: 8px 0 0 0;
+}
+
+table.attributes thead td:nth-child(5) {
+    border-right: 1px #888 solid;
+    border-radius: 0 8px 0 0;
+}
+
+table.attributes tbody tr:nth-child(even) td {
+    background: #eee;
+}
+
+table.attributes tbody tr:last-child td {
+    border-bottom: 1px #aaa solid;
 }

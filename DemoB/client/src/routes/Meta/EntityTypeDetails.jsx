@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useMetaDataContext } from '../../contexts/MetaData';
 import EditEntityTypeName from '../../components/meta/EditEntityTypeName';
+//import AttributeList from '../../components/meta/AttributeList';
+//import AttributeForm from '../../components/meta/AttributeForm';
 import Attributes from '../../components/meta/Attributes';
-import AttributeForm from '../../components/meta/AttributeForm';
 import BreadcrumbNav from '../../components/common/BreadcrumbNav';
-import LinkButton from '../../components/common/LinkButton';
-import { Add as AddIcon } from '../../components/common/Icons';
+//import LinkButton from '../../components/common/LinkButton';
+//import { Add as AddIcon } from '../../components/common/Icons';
 
 
 function EntityTypeDetails({ match }) {
@@ -17,13 +18,12 @@ function EntityTypeDetails({ match }) {
 
     const [editMode, setEditMode] = useState('');
 
-    const [wasDeleted, setWasDeleted] = useState(false);
+    const [tab, setTab] = useState('attributes');
 
-    const [attributeToEdit, setAttributeToEdit] = useState(null);
+    const [wasDeleted, setWasDeleted] = useState(false);
 
     const clearEditMode = () => {
         setEditMode('');
-        setAttributeToEdit(null);
     }
 
     const onSaveEntityTypeName = (name) => {
@@ -35,11 +35,6 @@ function EntityTypeDetails({ match }) {
             setEditMode('deleting')
             data.removeEntityType(id, () => { setWasDeleted(true); }, onError);
         }
-    }
-
-    const onEditAttribute = (attribute) => {
-        setAttributeToEdit(attribute);
-        setEditMode('edit attribute');
     }
 
     const onError = (error) => {
@@ -82,38 +77,24 @@ function EntityTypeDetails({ match }) {
                         { editMode == 'deleting' && (<span>&nbsp;deleting...</span>) }
                     </div>
                     <br />
-                    <Attributes
-                        attributes={data.entityType.attributes}
-                        isDisabled={editMode !== ''}
-                        onEdit={onEditAttribute}
-                        highlightAttributeId={attributeToEdit !== null ? attributeToEdit.id : null} />
+                    <header className="tabs">
+                        <h3 className={tab === 'attributes' ? 'active' : ''}
+                            onClick={setTab.bind(this, 'attributes')}>Attributes</h3>
+                        <h3 className={tab === 'relationships' ? 'active' : ''}
+                            onClick={setTab.bind(this, 'relationships')}>Relationships</h3>
+                    </header>
                     <br />
-                    {editMode === 'edit attribute' && (
-                        <AttributeForm
-                            entityTypeId={id}
-                            attribute={attributeToEdit}
-                            onSaved={clearEditMode}
-                            onCancel={clearEditMode}
-                            onDeleted={clearEditMode}
-                            onError={onError} />
-                    )}
-                    {editMode === 'add attribute' && (
-                        <AttributeForm
-                            entityTypeId={id}
-                            onSaved={clearEditMode}
-                            onCancel={clearEditMode}
-                            onError={onError} />
-                    )}
-                    {editMode !== 'add attribute' && editMode !== 'edit attribute' && (
-                        <div>
-                            <AddIcon />
-                            &nbsp;
-                            <LinkButton
-                                text={'new attribute'}
-                                onClick={setEditMode.bind(this, 'add attribute')}
-                                isDisabled={editMode !== ''} />
-                        </div>
-                    )}
+                    <section>
+                        {tab === 'attributes' && (
+                            <Attributes
+                                entityTypeId={id}
+                                editMode={editMode}
+                                setEditMode={setEditMode}
+                                attributes={data.entityType.attributes} />
+                        ) || tab === 'relationships' && (
+                            <div>relationships UI...</div>
+                        )}
+                    </section>
                 </>
             )}
         </>

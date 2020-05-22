@@ -15,7 +15,6 @@ namespace DemoB.Controllers.Meta
 
         public ValueTypesController(EavContext eavContext)
         {
-            System.Threading.Thread.Sleep(1000);
             _eavContext = eavContext;
         }
 

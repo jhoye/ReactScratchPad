@@ -16,7 +16,6 @@ namespace DemoB.Controllers.Meta
 
         public AttributesController(EavContext eavContext)
         {
-            System.Threading.Thread.Sleep(1000);
             _eavContext = eavContext;
         }
 
@@ -81,7 +80,7 @@ namespace DemoB.Controllers.Meta
         }
 
         [HttpPut]
-        public ActionResult Put([FromBody] EntityTypeAttribute entityTypeAttribute)
+        public ActionResult<EntityTypeAttribute> Put([FromBody] EntityTypeAttribute entityTypeAttribute)
         {
             try
             {

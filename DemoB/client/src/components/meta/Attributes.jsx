@@ -1,75 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useMetaDataContext } from '../../contexts/MetaData';
-import { Edit as EditIcon } from '../../components/common/Icons';
+import AttributeList from './AttributeList';
+import AttributeTable from './AttributeTable';
+import AttributeForm from './AttributeForm';
+import LinkButton from '../common/LinkButton';
+import { Add as AddIcon } from '../common/Icons';
 
 function Attributes(props) {
 
-    const data = useMetaDataContext();
+    const [attributeToEdit, setAttributeToEdit] = useState(null);
 
-    const valueType = (id) => {
-        return data.valueTypes === null ? (
-            <span>-</span>
-        ) : (
-            <span>{data.valueTypes.find(valueType => valueType.id === id).name}</span>
-        );
+    const clearEditMode = () => {
+        props.setEditMode('');
+        setAttributeToEdit(null);
     }
 
-    const editButton = (attribute) => {
-        return props.isDisabled ? (
-            <span className={'disabled'}>
-                <EditIcon />
-            </span>
-        ) : (
-            <span className={'clickable'}
-                title="edit"
-                onClick={props.onEdit.bind(this, attribute)}>
-                <EditIcon />
-            </span>
-        );
+    const onEditAttribute = (attribute) => {
+        setAttributeToEdit(attribute);
+        props.setEditMode('edit attribute');
     }
 
-    const listItem = (attribute) => {
-        return (
-            <li key={attribute.id}>
-                <span className={attribute.id === props.highlightAttributeId ? 'highlight' : ''}>
-                    <span>{attribute.name}</span>
-                    &nbsp;
-                    <span>(
-                        {valueType(attribute.valueTypeId)}
-                        {!attribute.isNullable && <span>, required</span>}
-                        {attribute.isUnique && <span>, unique</span>}
-                    )</span>
-                    &nbsp;
-                    {editButton(attribute)}
-                </span>
-            </li>
-        );
+    const onError = (error) => {
+        console.error(error);
     }
 
     return (
         <>
-            <h3>Attributes</h3>
-            <div>
-            {props.attributes.length === 0 ? (
-                <em>none</em>
-            ) : (
-                <ul>{props.attributes.map(listItem)}</ul>
+            <AttributeTable
+                attributes={props.attributes}
+                isDisabled={props.editMode !== ''}
+                onEdit={onEditAttribute}
+                highlightAttributeId={attributeToEdit !== null ? attributeToEdit.id : null} />
+            <br />
+            {props.editMode === 'edit attribute' && (
+                <AttributeForm
+                    entityTypeId={props.entityTypeId}
+                    attribute={attributeToEdit}
+                    onSaved={clearEditMode}
+                    onCancel={clearEditMode}
+                    onDeleted={clearEditMode}
+                    onError={onError} />
             )}
-            </div>
+            {props.editMode === 'add attribute' && (
+                <AttributeForm
+                    entityTypeId={props.entityTypeId}
+                    onSaved={clearEditMode}
+                    onCancel={clearEditMode}
+                    onError={onError} />
+            )}
+            {props.editMode !== 'add attribute' && props.editMode !== 'edit attribute' && (
+                <div>
+                    <AddIcon />
+                    &nbsp;
+                    <LinkButton
+                        text={'new attribute'}
+                        onClick={props.setEditMode.bind(this, 'add attribute')}
+                        isDisabled={props.editMode !== ''} />
+                </div>
+            )}
         </>
     );
 }
 
 // PropTypes
-Attributes.defaultProps = {
-    highlightAttributeId: null
-}
 Attributes.propTypes = {
-    attributes: PropTypes.array.isRequired,
-    isDisabled: PropTypes.bool.isRequired,
-    onEdit: PropTypes.func.isRequired,
-    highlightAttributeId: PropTypes.string
+    entityTypeId: PropTypes.string.isRequired,
+    editMode: PropTypes.string.isRequired,
+    setEditMode: PropTypes.func.isRequired,
+    attributes: PropTypes.array.isRequired
 }
 
 export default Attributes;

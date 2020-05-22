@@ -16,7 +16,6 @@ namespace DemoB.Controllers.Meta
 
         public EntityTypesController(EavContext eavContext)
         {
-            System.Threading.Thread.Sleep(1000);
             _eavContext = eavContext;
         }
 

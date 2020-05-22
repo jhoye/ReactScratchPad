@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function About() {
+
+    const [selectedTab, setSelectedTab] = useState("Tab 1");
+
+    const tabSelected = (labelText) => {
+        setSelectedTab(labelText);
+    }
 
     return (
         <div className="about-page">
