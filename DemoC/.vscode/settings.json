@@ -13,7 +13,7 @@
         "**/node_modules": true
     },
     "workbench.colorCustomizations": {
-        "titleBar.activeBackground": "#0055bb",
+        "titleBar.activeBackground": "#bb0088",
         "titleBar.inactiveForeground": "#ffffff"
     }
 }
