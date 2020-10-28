@@ -8,6 +8,7 @@ hr {
     height: 1px;
     border: 0;
     border-bottom: 1px #aaa solid;
+    margin: 8px -8px;
 }
 
 dt {
@@ -77,8 +78,9 @@ a.active-nav-link {
 }
 
 header.tabs {
-    padding: 8px 0 7px 16px;
+    padding: 8px 0 7px 8px;
     border-bottom: 1px #aaa solid;
+    margin: 0 -8px;
 }
 
 header.tabs h3 {
@@ -149,8 +151,8 @@ table.attributes thead td:nth-child(5) {
     border-radius: 0 8px 0 0;
 }
 
-table.attributes tbody tr:nth-child(even) td {
-    background: #eee;
+table.attributes tbody tr td {
+    border-bottom: 1px #aaa dashed;
 }
 
 table.attributes tbody tr:last-child td {
